@@ -9,6 +9,20 @@ const logginButton = document.querySelector('main section:first-of-type > button
 
 chatScreen.classList.add("hidden");
 
+const mathQuoteEl = document.getElementById('math-quote');
+
+fetch('http://api.mathjs.org/v4/?expr=random() * 10', {
+    method: 'GET',
+    headers: { 'Content-Type': 'application/json' }
+})
+    .then(response => response.text())
+    .then(problem => {
+        // Set the text of the math-quote element to the generated problem
+        mathQuoteEl.textContent = problem;
+    })
+    .catch(error => console.error(error));
+
+
 // // Annuleer the enter event on the input
 usernameInput.addEventListener('keydown', (event) => {
     if (event.keyCode === 13) {
