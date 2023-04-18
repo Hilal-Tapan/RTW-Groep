@@ -388,7 +388,7 @@ socket.on('focus', (hasFocus) => {
 
 <!-- Here are some hints for your projects Readme.md! -->
 
-<!-- Start out with a title and a description -->
+<!-- Start out with a title and a descriptin -->
 
 <!-- Add a nice image here at the end of the week, showing off your shiny frontend 📸 -->
 
