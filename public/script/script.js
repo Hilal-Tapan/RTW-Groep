@@ -80,9 +80,6 @@ socket.on('chat message', (msg) => {
 });
 
 
-
-
-
 socket.on('focus', (hasFocus) => {
     if (hasFocus) {
         chatScreen.classList.add('focus');

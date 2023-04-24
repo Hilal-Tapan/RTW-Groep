@@ -1,3 +1,10 @@
+# belangrijk
+- je appt moet gehost zijn
+- uitgebreid gedocumenteerd
+- multiuser
+- je gebruikt data en de client moet hiermee iets doen
+- kunnen meerdere mensen tegelijk verbinden met je app
+
 # Chat.App
 During this course we will learn how to build a real-time application. We will learn techniques to setup an open connection between the client and the server. This will enable us to send data in real-time both ways, at the same time.
 
