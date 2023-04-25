@@ -41,23 +41,14 @@ io.on('connection', async (socket) => {
         // io.emit questions[count]
         io.emit('chat message', chat); // broadcast the message to all clients 
         // on correct questionCount++ en dan sendNewQuestion()
-
-        
     });
 
 
   socket.on('disconnect', () => {
     console.log('user disconnected');
   });
-
-
-  socket.on('answer', (answer) => {
-    if (!questionsLoaded) {
-      io.emit('error', 'Questions are not yet loaded. Please try again later.');
-      return;
-    }
-  });
 });
+
 
 function sendNewQuestion() {
     // update het questionNumber?
