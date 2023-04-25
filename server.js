@@ -3,6 +3,7 @@ const app = express();
 const http = require('http').createServer(app);
 const io = require('socket.io')(http);
 const axios = require('axios');
+const { Console } = require('console');
 const port = process.env.PORT || 4242;
 
 app.set('views', 'views');
@@ -35,13 +36,26 @@ io.on('connection', async (socket) => {
     
     sendNewQuestion();
     
+    // socket.on('chat message', (chat) => {
+    //     // if chat == correctAnswer -> show feedback + increase count++
+    //     // io.emit questions[count]
+    //     io.emit('chat message', chat); // broadcast the message to all clients 
+
+    //     // to do:
+    //     // on correct questionCount++ en dan sendNewQuestion()
+    // });
 
     socket.on('chat message', (chat) => {
-        // if chat == correctAnswer -> show feedback + increase count++
-        // io.emit questions[count]
+        console.log(chat)
+        
+        if (chat.message.includes(currentQuestion.correctAnswer)) { 
+            console.log("correctAnswer")// Check if the chat message includes the correct answer
+            questionCount++; // Increment question count
+            sendNewQuestion(); // Send a new question
+        }
         io.emit('chat message', chat); // broadcast the message to all clients 
-        // on correct questionCount++ en dan sendNewQuestion()
     });
+    
 
 
   socket.on('disconnect', () => {
