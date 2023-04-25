@@ -82,6 +82,7 @@ const loggin = document.querySelector('main section:first-of-type');
 const chatScreen = document.querySelector('main section:last-of-type');
 const logginButton = document.querySelector('main section:first-of-type > button');
 
+
 chatScreen.classList.add('hidden');
 
 // Cancel the enter event on the input

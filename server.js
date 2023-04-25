@@ -9,47 +9,41 @@ app.set('views', 'views');
 app.set('view engine', 'ejs');
 app.use(express.static('public'));
 
+let questions = undefined;
 let questionsLoaded = false;
-// let count = 0;
+let currentQuestion = undefined;
+let questionCount = 0;
 
-io.on('connection', async (socket) => {
-  console.log('connected');
-
-// const questions = await fetchQuestions();
-// const firstQ = questions[count];
-// const correctAnswer = firstQ.correctAnswer;
-// io.emit etc
-
-  axios.get('https://the-trivia-api.com/v2/questions')
+axios.get('https://the-trivia-api.com/v2/questions')
     .then((response) => {
-      const questions = response.data;
-
-      if (questions.length > 0) {
-          const question = questions[0];
-          const choices = [
-            question.correctAnswer,
-            ...question.incorrectAnswers
-          ];
-          console.log(choices)
-        io.emit('question', {
-          questionText: question.question.text,
-          choices
-        });
-      } else {
-        io.emit('error', 'No questions found');
-      }
+        questions = response.data;
     })
     .catch((error) => {
-      console.error(error);
-      io.emit('error', 'Error fetching questions');
+        console.error(error);
     });
 
+// async function loadQuestions() {
+//     return await axios.get('https://the-trivia-api.com/v2/questions')
+// }
+// loadQuestions().then(data => {
+//     console.log('w000t: ' + data.length)
+// })
+// Await??
 
-  socket.on('chat message', (chat) => {
-    // if chat == correctAnswer -> show feedback + increase count++
-    // io.emit questions[count]
-    io.emit('chat message', chat); // broadcast the message to all clients
-  });
+io.on('connection', async (socket) => {
+    console.log('connected');
+    
+    sendNewQuestion();
+    
+
+    socket.on('chat message', (chat) => {
+        // if chat == correctAnswer -> show feedback + increase count++
+        // io.emit questions[count]
+        io.emit('chat message', chat); // broadcast the message to all clients 
+        // on correct questionCount++ en dan sendNewQuestion()
+
+        
+    });
 
 
   socket.on('disconnect', () => {
@@ -64,6 +58,26 @@ io.on('connection', async (socket) => {
     }
   });
 });
+
+function sendNewQuestion() {
+    // update het questionNumber?
+
+    if (questions.length > 0) {
+        currentQuestion = questions[questionCount];
+
+        console.log(currentQuestion);
+        
+        io.emit('question', {
+            questionText: currentQuestion.question.text,
+            choices: [
+                currentQuestion.correctAnswer,
+                ...currentQuestion.incorrectAnswers
+            ]
+        });
+
+        console.log('emitted question')
+    }
+}
 
 
 app.get('/', (request, response) => {
