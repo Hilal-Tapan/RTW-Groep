@@ -93,6 +93,7 @@ usernameInput.addEventListener('keydown', (event) => {
   }
 });
 
+
 // Login button
 logginButton.addEventListener('click', () => {
   loggin.classList.add('hidden');
@@ -107,6 +108,7 @@ input.addEventListener('input', () => {
   chatScreen.classList.add('focus');
   socket.emit('focus', true); // Send the focus class to other clients
 });
+
 
 // Username
 sendMessage.addEventListener('click', (event) => {
@@ -124,6 +126,7 @@ sendMessage.addEventListener('click', (event) => {
   }
 });
 
+
 // Chat message
 socket.on('chat message', (msg) => {
   console.log('chat message: ', msg.message);
@@ -138,6 +141,7 @@ socket.on('chat message', (msg) => {
   }
 });
 
+
 // Add focus class
 socket.on('focus', (hasFocus) => {
   if (hasFocus) {
@@ -146,6 +150,7 @@ socket.on('focus', (hasFocus) => {
     chatScreen.classList.remove('focus');
   }
 });
+
 
 // Questions
 socket.on('question', (data) => {
@@ -160,6 +165,7 @@ socket.on('question', (data) => {
 //   }
 //   questionContainer.style.display = 'block'; // Show the question container
 });
+
 
 // Error
 socket.on('error', (errorMessage) => {

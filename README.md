@@ -385,6 +385,8 @@ socket.on('focus', (hasFocus) => {
 * https://adaptable.io/ 
 * https://railway.app/ 
 * https://socket.io/get-started/chat/ 
+* https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/includes 
+* https://the-trivia-api.com/docs/v2 
 
 <!-- Here are some hints for your projects Readme.md! -->
 

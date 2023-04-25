@@ -35,15 +35,6 @@ io.on('connection', async (socket) => {
     console.log('connected');
     
     sendNewQuestion();
-    
-    // socket.on('chat message', (chat) => {
-    //     // if chat == correctAnswer -> show feedback + increase count++
-    //     // io.emit questions[count]
-    //     io.emit('chat message', chat); // broadcast the message to all clients 
-
-    //     // to do:
-    //     // on correct questionCount++ en dan sendNewQuestion()
-    // });
 
     socket.on('chat message', (chat) => {
         console.log(chat)
@@ -55,8 +46,6 @@ io.on('connection', async (socket) => {
         }
         io.emit('chat message', chat); // broadcast the message to all clients 
     });
-    
-
 
   socket.on('disconnect', () => {
     console.log('user disconnected');
@@ -96,10 +85,8 @@ http.listen(port, () => {
 
 
 
-
+// AANTEKENINGEN
 // on connection ipv on answer waar die nu op staat
-
-
 
 // fetch ook in server
 
