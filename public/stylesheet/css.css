@@ -53,7 +53,7 @@ main {
     position: relative;
 
     background-color: var(--purpel);
-    border-radius: 8% 8% 8% 8% / 8% 8% 8% 8%;
+    border-radius: 3em;
     box-shadow: 0 0 .5em .5em var(--brouwn);
 }
 
