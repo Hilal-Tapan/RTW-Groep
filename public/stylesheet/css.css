@@ -49,7 +49,7 @@ header {
 
 main {
     width: 80vw;
-    height: 70vh;
+    height: 90vh;
     position: relative;
 
     background-color: var(--purpel);
@@ -153,7 +153,7 @@ main section:first-of-type>button:active {
 main section:last-of-type{
     width: 100%;
     height: 93%;
-    padding: 1em 0;
+    padding: 1em 0 0 0;
 
     background-image: linear-gradient(to top, transparent, var(--white));
     border-radius: 8% 8% 8% 8% / 8% 8% 8% 8% ;
@@ -165,7 +165,7 @@ main section:last-of-type{
     align-items: center;
 }
 
-main section:last-of-type ul{
+main section:last-of-type #berichten{
     width: 95%;
     height: 100%;
 
@@ -192,7 +192,7 @@ main section:last-of-type ul::-webkit-scrollbar{
     opacity: 0;
 } */
 
-main section:last-of-type ul li{
+main section:last-of-type > ul:nth-of-type(1) li{
     width: fit-content;
     max-width: 90%;
     height: fit-content;
@@ -280,4 +280,46 @@ main section:last-of-type form button {
 
 main section:last-of-type form button:active{
     background-color: var(--rosy);
+}
+
+div{
+    padding: 1em 1em 0 1em;
+}
+
+#questions {
+    padding: 0 1em 1em 1em;
+    border-radius: 2.2em;
+
+}
+
+#answer-choices {
+    display: grid;
+    place-content: center;
+}
+
+#answer-choices li{
+    list-style:none;
+    /* margin: auto; */
+    background: var(--blue);
+}
+
+#answer-choices li:nth-child(1) {
+    grid-column-start: 1 ;
+    grid-row-start: 1 ;
+}
+#answer-choices li:nth-child(2) {
+    grid-column-start: 2 ;
+    grid-row-start: 1 ;
+}
+#answer-choices li:nth-child(3) {
+    grid-column-start: 1 ;
+    grid-row-start: 2 ;
+}
+#answer-choices li:nth-child(4) {
+    grid-column-start: 2 ;
+    grid-row-start: 2 ;
+}
+
+ul#answer-choices ul {
+    display: none;
 }
