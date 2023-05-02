@@ -64,9 +64,9 @@ function sendNewQuestion() {
 
         console.log('emitted question')
          // Play the sound effect
-    //     player.play('public/sounds/sound.mp3', function (err) {
-    //     if (err) throw err;
-    //   });
+        player.play('public/sounds/sound.mp3', function (err) {
+        if (err) throw err;
+      });
     }
 }
 
