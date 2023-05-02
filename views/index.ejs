@@ -21,20 +21,19 @@
             </section>
             
             <section>
-                <ul>
-
-                </ul>
-                <div id="question-container">
-                    <section id="questions">
-                        <h2>Trivia Questions</h2>
-                        <p id="question-text"></p>
-                        <ul id="answer-choices"></ul>
-                      </section>
-                </div>
+                <ul id="berichten"></ul>
                 <form>
                     <input type="text" name="message" id="message-input" placeholder="Chatting ..."  required>
                     <button type="submit" id="message-button"></button>
                 </form>
+
+                <div id="question-container">
+                    <section id="questions">
+                        <h2>Question</h2>
+                        <p id="question-text"></p>
+                        <ul id="answer-choices"></ul>
+                      </section>
+                </div>
             </section>
         </main>
         <%- include("./partials/footer.ejs") -%>

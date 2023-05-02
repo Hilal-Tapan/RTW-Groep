@@ -376,6 +376,7 @@ socket.on('focus', (hasFocus) => {
 ![proto](https://github.com/SundousKanaan/RTW-Groep/blob/hilal/readme-images/prototype-1.png)
 
 
+## Vragen
 
 
 ## Sources
@@ -387,6 +388,8 @@ socket.on('focus', (hasFocus) => {
 * https://socket.io/get-started/chat/ 
 * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/includes 
 * https://the-trivia-api.com/docs/v2 
+* https://cloudconvert.com/wav-to-mp3
+* https://www.npmjs.com/package/play-sound
 
 <!-- Here are some hints for your projects Readme.md! -->
 

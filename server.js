@@ -5,6 +5,7 @@ const io = require('socket.io')(http);
 const axios = require('axios');
 const { Console } = require('console');
 const port = process.env.PORT || 4242;
+const player = require('play-sound')();
 
 app.set('views', 'views');
 app.set('view engine', 'ejs');
@@ -15,6 +16,7 @@ let questionsLoaded = false;
 let currentQuestion = undefined;
 let questionCount = 0;
 
+
 axios.get('https://the-trivia-api.com/v2/questions')
     .then((response) => {
         questions = response.data;
@@ -23,13 +25,6 @@ axios.get('https://the-trivia-api.com/v2/questions')
         console.error(error);
     });
 
-// async function loadQuestions() {
-//     return await axios.get('https://the-trivia-api.com/v2/questions')
-// }
-// loadQuestions().then(data => {
-//     console.log('w000t: ' + data.length)
-// })
-// Await??
 
 io.on('connection', async (socket) => {
     console.log('connected');
@@ -54,8 +49,6 @@ io.on('connection', async (socket) => {
 
 
 function sendNewQuestion() {
-    // update het questionNumber?
-
     if (questions.length > 0) {
         currentQuestion = questions[questionCount];
 
@@ -70,9 +63,12 @@ function sendNewQuestion() {
         });
 
         console.log('emitted question')
+         // Play the sound effect
+        player.play('public/sounds/sound.mp3', function (err) {
+        if (err) throw err;
+      });
     }
 }
-
 
 app.get('/', (request, response) => {
   response.render('index');
@@ -97,3 +93,38 @@ http.listen(port, () => {
 
 // client stuurt alleen berichten door
 // server: als het klopt ook nieuwe vraag doorsturen
+
+
+// const audio = new Audio('/public/sounds/sound.mp3'); // Replace with the path to your sound file
+// audio.volume = 0.5; // Adjust the volume as needed
+
+// function sendNewQuestion() {
+//     if (questions.length > 0) {
+//         currentQuestion = questions[questionCount];
+
+//         console.log(currentQuestion);
+        
+//         io.emit('question', {
+//             questionText: currentQuestion.question.text,
+//             choices: [
+//                 currentQuestion.correctAnswer,
+//                 ...currentQuestion.incorrectAnswers
+//             ]
+//         });
+
+//         console.log('emitted question')
+
+
+//         socket.on('chat message', (chat) => {
+//             console.log(chat)
+            
+//             if (chat.message.includes(currentQuestion.correctAnswer)) { 
+//                 console.log("correctAnswer")// Check if the chat message includes the correct answer
+//                 questionCount++; // Increment question count
+//                 audio.play(); // Play the sound effect
+//                 sendNewQuestion(); // Send a new question
+//             }
+//             io.emit('chat message', chat); // broadcast the message to all clients 
+//         });
+//     }
+// }
