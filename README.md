@@ -2,7 +2,7 @@
 During this course we will learn how to build a real-time application. We will learn techniques to setup an open connection between the client and the server. This will enable us to send data in real-time both ways, at the same time.
 
 ## 👁️ Demo Link! 👁️
-rtw-groep-production.up.railway.app
+[LIVE LINK](https://rtw-groep-production-324f.up.railway.app/)
 
 ---
 
@@ -265,14 +265,15 @@ Whether you're building a trivia game, a quiz app, or simply looking to add some
 * https://the-trivia-api.com/docs/v2 
 * https://cloudconvert.com/wav-to-mp3
 * https://www.npmjs.com/package/play-sound
+* https://www.freecodecamp.org/news/gitignore-what-is-it-and-how-to-add-to-repo/
 
 <!-- Here are some hints for your projects Readme.md! -->
 
-<!-- Start out with a title and a descriptin -->
+<!-- CHECK :Start out with a title and a descriptin CHECK-->
 
-<!-- Add a nice image here at the end of the week, showing off your shiny frontend 📸 -->
+<!-- Add a nice image here at the end of the week, showing off your shiny frontend 📸  -->
 
-<!-- Add a link to your live demo in Github Pages 🌐-->
+<!-- CHECK: Add a link to your live demo in Github Pages 🌐 -->
 
 <!-- replace the code in the /docs folder with your own, so you can showcase your work with GitHub Pages 🌍 -->
 
@@ -280,19 +281,19 @@ Whether you're building a trivia game, a quiz app, or simply looking to add some
 
 <!-- ☝️ replace this description with a description of your own work -->
 
-<!-- How about a section that describes how to install this project? 🤓 -->
+<!-- CHECK: How about a section that describes how to install this project? 🤓 -->
 
-<!-- ...but how does one use this project? What are its features 🤔 -->
+<!-- CHECK: ...but how does one use this project? What are its features 🤔 -->
 
-<!-- What external data source is featured in your project and what are its properties 🌠 -->
+<!-- CHECK: What external data source is featured in your project and what are its properties 🌠 -->
 
 <!-- This would be a good place for your data life cycle ♻️-->
 
 <!-- Maybe a checklist of done stuff and stuff still on your wishlist? ✅ -->
 
-<!-- We all stand on the shoulders of giants, please link all the sources you used in to create this project. -->
+<!-- CHECK : We all stand on the shoulders of giants, please link all the sources you used in to create this project. -->
 
-<!-- How about a license here? When in doubt use MIT. 📜  -->
+<!-- CHECK: How about a license here? When in doubt use MIT. 📜  -->
 
 
 <!-- SSSSS -->
