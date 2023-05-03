@@ -218,6 +218,7 @@ Whether you're building a trivia game, a quiz app, or simply looking to add some
 [The Trivia Api](https://the-trivia-api.com/docs/v2/#section/Introduction)
 
 ## Data modelling
+- insert data modeling pic
 
 
 ---
@@ -240,6 +241,17 @@ Whether you're building a trivia game, a quiz app, or simply looking to add some
 
 
 ## Vragen
+* heb gitignore later toegevoegd hoe kan ik die node modules toch nog verwijderen
+* Me geluidje doet t niet alleen bij deploy site
+* Die offline state
+
+
+## TO DO
+- Readme
+- documentatie in codes
+- offline status uitwerken
+- Geluid fixen
+- eventueel ook kleurtje toevoegen naast geluid
 
 
 ## Sources
