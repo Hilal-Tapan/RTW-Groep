@@ -1,7 +1,12 @@
 const express = require('express');
 const app = express();
 const http = require('http').createServer(app);
-const io = require('socket.io')(http);
+const io = require('socket.io')(http, {
+ 
+  maxHttpBufferSize: 1000,
+  reconnectionAttempts: 10, // is dit wat jullie bedoelen met offline?
+});
+
 const axios = require('axios');
 const { Console } = require('console');
 const port = process.env.PORT || 4242;
@@ -28,23 +33,29 @@ axios.get('https://the-trivia-api.com/v2/questions')
 
 io.on('connection', async (socket) => {
     console.log('connected');
-    
+
+    // flush the event buffer on reconnect
+    socket.on('reconnect', (attemptNumber) => {
+      console.log(`reconnected after ${attemptNumber} attempts`);
+      socket.emitBuffered(); // flush the buffer
+    });
+
     sendNewQuestion();
 
     socket.on('chat message', (chat) => {
         console.log(chat)
-        
-        if (chat.message.includes(currentQuestion.correctAnswer)) { 
+
+        if (chat.message.includes(currentQuestion.correctAnswer)) {
             console.log("correctAnswer")// Check if the chat message includes the correct answer
             questionCount++; // Increment question count
             sendNewQuestion(); // Send a new question
         }
-        io.emit('chat message', chat); // broadcast the message to all clients 
+        io.emit('chat message', chat); // broadcast the message to all clients
     });
 
-  socket.on('disconnect', () => {
-    console.log('user disconnected');
-  });
+    socket.on('disconnect', () => {
+        console.log('user disconnected');
+    });
 });
 
 
@@ -53,7 +64,7 @@ function sendNewQuestion() {
         currentQuestion = questions[questionCount];
 
         console.log(currentQuestion);
-        
+
         io.emit('question', {
             questionText: currentQuestion.question.text,
             choices: [
@@ -78,6 +89,7 @@ app.get('/', (request, response) => {
 http.listen(port, () => {
   console.log('listening on port:', port);
 });
+
 
 
 

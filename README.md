@@ -53,6 +53,9 @@ node app.js
 * Users can chat together online
 * Can see if someone is typing
 * Can choose a username and which gets displayed with each message
+* Can play a Trivia quiz game together
+* Own messages are getting displayed on the right side of the screen, the other users on the left side
+* 
 
 ---
 
@@ -204,176 +207,36 @@ We thought it was important to display yourself on the right, and all the other 
 
 ---
 
+# API
+## The Trivia Api
+The Trivia API is a web-based service that provides developers with a simple and easy-to-use interface for accessing a vast collection of trivia questions and answers. With over 30,000 questions available in multiple categories, the API offers a wealth of information for developers looking to create trivia-based applications or games.
+
+The API uses RESTful web service architecture and returns data in JSON format, making it easy to integrate into a wide variety of programming languages and platforms. In addition to the questions and answers themselves, the API also provides additional metadata about each question, such as its difficulty level, category, and more.
+
+Whether you're building a trivia game, a quiz app, or simply looking to add some fun and educational content to your website, The Trivia API provides a comprehensive and reliable source of trivia data that is sure to delight and engage your users.
+
+[The Trivia Api](https://the-trivia-api.com/docs/v2/#section/Introduction)
+
+## Data modelling
+
+
+---
+
 ## Server Side Code
-```js
-const express = require('express')
-const app = express()
-const http = require('http').createServer(app)
-const io = require('socket.io')(http)
-const port = process.env.PORT || 4242
-
-app.set('views', 'views');
-app.set('view engine', 'ejs');
-app.use(express.static("public"))
-
-// home page
-app.get('/', async (req, res) => {
-    try {
-        res.render('index');
-    } catch (error) {
-        res.status(500).send(error.message);
-    }
-})
-
-// We passen het server script aan om een console bericht te loggen zodra 
-// er een gebruiker verbinding maakt met via socket.io, dat zie je aan het connection event.
-io.on('connection', (socket) => {
-    console.log('connected');
-
-    socket.on('chat message', (chat) => {
-        // console.log(`${username}: ${message}`);
-        io.emit('chat message', chat); // broadcast the message to all clients
-      });
-
-    // Als een gebruiker connectie maakt zie je de log message die we ingesteld hebben, 
-    // misschien willen we ook zien wanneer een gebruiker disconnect.
-    socket.on('disconnect', () => {
-        console.log('user disconnected')
-    })
-
-    socket.on('focus', (hasFocus) => {
-        socket.broadcast.emit('focus', hasFocus);
-      });
-});
-
-app.get('/', (request, response) => {
-    //   response.send('<h1>Hallo wereld! LOL</h1>')
-    response.render('index')
-})
-
-http.listen(port, () => {
-    console.log('listening on port:', port)
-})
-```
-
-### Breakdown of the code:
-
-* const express = require('express'): Imports the Express framework.
-* const app = express(): Creates a new instance of the Express application.
-* const http = require('http').createServer(app): Creates an HTTP server instance with the Express application.
-* const io = require('socket.io')(http): Initializes a Socket.io instance using the HTTP server.
-* const port = process.env.PORT || 4242: Sets the port number for the server to listen to, using the environment variable PORT or the default port 4242.
-* app.set('views', 'views');: Sets the folder for the views (HTML templates).
-* app.set('view engine', 'ejs');: Sets the view engine to EJS (Embedded JavaScript).
-* app.use(express.static("public")): Specifies that the server should serve static files from the "public" folder.
-* app.get('/', async (req, res) => { ... }): Handles GET requests to the root URL of the server. This route renders the "index" template using EJS.
-* io.on('connection', (socket) => { ... }): Handles socket connections. This event listener logs a "connected" message when a new user connects, broadcasts chat messages to all connected clients, and logs a "user disconnected" message when a user disconnects.
-* app.get('/', (request, response) => { ... }): Handles another GET request to the root URL of the server. * This route renders the "index" template using EJS.
-* http.listen(port, () => { ... }): Starts the server listening on the specified port.
-
-Overall, this code sets up a basic server with Socket.io integration to allow real-time communication between clients. It also uses the Express framework and EJS templating engine to serve static files and render HTML templates.
 
 --- 
 
 ## Client Side Code
-```js
-const messages = document.querySelector('section ul');
-
-const input = document.querySelector('#message-input');
-const sendMessage = document.querySelector('#message-button');
-const usernameInput = document.querySelector('#username-input');
-const loggin= document.querySelector('main section:first-of-type')
-const chatScreen= document.querySelector('main section:last-of-type')
-const logginButton = document.querySelector('main section:first-of-type > button')
-
-chatScreen.classList.add("hidden");
-
-// // Annuleer the enter event on the input
-usernameInput.addEventListener('keydown', (event) => {
-    if (event.keyCode === 13) {
-      event.preventDefault();
-      sendMessage.click();
-    }
-});
-
-logginButton.addEventListener('click' , () => {
-    loggin.classList.add("hidden");
-    chatScreen.classList.remove("hidden");
-    socket.emit('focus', true); // Verzend de focus class naar andere clients
-});
-
-input.addEventListener('input', () => {
-    const inputValue = input.value;
-    // Doe hier iets met de waarde van het invoerveld
-    console.log(inputValue);
-    chatScreen.classList.add('focus');
-    socket.emit('focus', true); // Verzend de focus class naar andere clients
-});
-
-sendMessage.addEventListener('click', (event) => {
-    chatScreen.classList.remove('focus')
-    socket.emit('focus', false); // Verzend de focus class naar andere clients
-
-    event.preventDefault();
-    if (input.value) {
-
-        const chat ={
-            username: usernameInput.value,
-            message: input.value
-        }
-
-        socket.emit('chat message', chat);
-        input.value = '';
-    }
-});
-
-socket.on('chat message', (msg) => {
-    console.log('chat message: ', msg.message);
-    console.log(chatScreen);
-
-    const element = document.createElement('li');
-    element.textContent = ` ${msg.username}: ${msg.message} `;
-    messages.appendChild(element);
-    messages.scrollTop = messages.scrollHeight;
-
-    if (msg.username === usernameInput.value) {
-        element.classList.add('message');
-    }
-});
-
-socket.on('focus', (hasFocus) => {
-    if (hasFocus) {
-        chatScreen.classList.add('focus');
-    } else {
-        chatScreen.classList.remove('focus');
-    }
-});
-```
-
-### Breakdown of the code:
-* const messages = document.querySelector('section ul'); selects the <ul> element that contains the chat messages.
-* const input = document.querySelector('#message-input'); selects the <input> element where the user types their message.
-* const sendMessage = document.querySelector('#message-button'); selects the button that sends the message to the chat.
-* const usernameInput = document.querySelector('#username-input'); selects the <input> element where the user types their username.
-* const loggin= document.querySelector('main section:first-of-type') selects the first <section> element inside the <main> element, which contains the login form.
-* const chatScreen= document.querySelector('main section:last-of-type') selects the last <section> element inside the <main> element, which contains the chat screen.
-* const logginButton = document.querySelector('main section:first-of-type > button') selects the button inside the login form that submits the form.
-* chatScreen.classList.add("hidden"); hides the chat screen when the page is first loaded.
-* usernameInput.addEventListener('keydown', (event) => {...}) listens for the 'keydown' event on the username input field. If the user presses the Enter key, the event is prevented and the send message button is clicked.
-* logginButton.addEventListener('click' , () => {...}) listens for the 'click' event on the login button. When the button is clicked, the login form is hidden and the chat screen is shown. A socket.io event is emitted to inform other clients that this client has focused on the chat.
-* input.addEventListener('input', () => {...}) listens for the 'input' event on the message input field. * * When the user types something in the field, the chat screen is given the 'focus' class, and a socket.io event is emitted to inform other clients that this client has focused on the chat.
-* sendMessage.addEventListener('click', (event) => {...}) listens for the 'click' event on the send message button. When the button is clicked, the chat screen loses the 'focus' class, a socket.io event is emitted to inform other clients that this client has unfocused from the chat, and the message is sent to the server via a socket.io event.
-* socket.on('chat message', (msg) => {...}) listens for the 'chat message' event emitted by the server when a new message is received. The message is added to the <ul> element containing the chat messages, and the element is scrolled to the bottom.
-* socket.on('focus', (hasFocus) => {...}) listens for the 'focus' event emitted by the server when a client focuses or unfocuses from the chat. The chat screen is given or loses the 'focus' class accordingly.
 
 ---
 
-## Prototype
+## Prototype of the chat.io area
 ### Log in page
 ![proto](https://github.com/SundousKanaan/RTW-Groep/blob/hilal/readme-images/prototype.png)
 
 ### Chat area
 ![proto](https://github.com/SundousKanaan/RTW-Groep/blob/hilal/readme-images/prototype-1.png)
+
 
 
 ## Vragen
