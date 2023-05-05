@@ -293,7 +293,7 @@ When someone is typing, all users will see this in the chat.
 The position of your own messages will be on the right and all other users' messafes will be on the left. This way the user can easily see their own messages in the chat room
 
 ### Correct Answers
-If the chat message contains the correct answer for that specific question, the next question will be displayed for all users.
+If the chat message contains the correct answer for that specific question, the next question will be displayed for all users. The users will see a green border around the question area, which is an indicator for correct answer. They will also hear a "bling!" sound which is also an indicator.
 
 ---
 
@@ -309,21 +309,35 @@ If the chat message contains the correct answer for that specific question, the 
 - insert pictures
 
 
+# Reflection
+## What went well?
+The socket start up went pretty well! It was well documented on the website which helped a lot. Also working together with Sundous in the first week went very well! We made a good and hardworking team.
+
+The sound player was actually very easy to achieve. I had never worked with sound before like this and was kinda out of my comfort zone. But i'm glad i tried it out! Even though it does not work in the deploy website, i have definitely learned a new thing from that.
+
+The green border that gets visible after the correct answer is being sent in the chat. This was pretty fun to do and worked out very well. Im happy with the end results.
+
+
+## What went wrong?
+Quite a few things went wrong actually. To start off the Api switch, I started out with math.js, which caused me to loose some time cause i couldn't get it to work. I switched to Trivia Api which was a much better option. 
+
+A second thing is the sound. When someone enters the correct answer, a sounds is being send out to the users. I used play-sound for this, it works perfectly on localhost but when i deploy it it doesnt work. I have to ask my teacher how to fix this, google didn't do me much justice.
+
+Another thing is that the answers from the questions Api were being displayed twice. I did not know how to fix this, it took me hours the other day. One day it was gone and tbh i dont know how i did it. When i was writing code it just suddenly disappeared and i noticed later on. It was a lucky solve!
+
 
 ## Vragen
 * heb gitignore later toegevoegd hoe kan ik die node modules toch nog verwijderen
-* Me geluidje doet t niet  bij deploy site wel bij localhost
-* Die tekst daaronder de vragen krijg k maar niet weg
+* Me geluidje doet t niet  bij deploy site wel bij localhost, komt door die npm maar is er een makkelijke manier dit te fixen
 
 
 ## TO DO
-- Readme
-- documentatie in codes
-- offline status uitwerken
-- Geluid fixen?
-- eventueel ook kleurtje toevoegen naast geluid
-- Die tekst daaronder wegkrijgen
-- offline state
+- [ ] Readme (mee bezig)
+- [ ] documentatie in codes (als laatste kan dit)
+- [ ] offline status uitwerken
+- [ ] Geluid fixen (extra dingetje)?
+- [x] eventueel ook kleurtje toevoegen naast geluid
+- [x] Die tekst daaronder wegkrijgen
 
 
 
