@@ -1,4 +1,4 @@
-# Chat.App
+# Trivia.Chat (RTW)
 During this course we will learn how to build a real-time application. We will learn techniques to setup an open connection between the client and the server. This will enable us to send data in real-time both ways, at the same time.
 
 ## 👁️ Demo Link! 👁️
@@ -6,19 +6,15 @@ During this course we will learn how to build a real-time application. We will l
 
 ---
 
-## 💻 Participants 💻 
-* Sundous Kanaan
-* Hilal Tapan
-
----
-
 ## 🖊 Concept 🖊
-Chat.app is an environment where users can chat with each other. It is a project based on the course real time web course from the minor web, University of Amsterdam.
+Trivia.Chat is an environment where users can chat with each other and play a Trivia quiz game. When a user enters the right answer, the next question will be displayed for all users.
+
+This is a project based on the course Real Time Web (RTW) from the minor web, at the University of Amsterdam.
 
 ---
 
 ## 📖 Job Story 📖
-As a social media user, I want to connect with my friends and family through a secure chatting app, so that I can easily communicate with them.
+As a web user, I want to be able to play Trivia quiz game online with other people, so i can entertain myself.
 
 ---
 
@@ -64,11 +60,11 @@ node app.js
 * Node.js
 * Express
 * Socket.io
+* The Trivia API
 
 ---
 
-## Process
-### Getting started with socket.io
+## Getting started with socket.io
 1. The first goal is to set up a simple HTML webpage that serves out a form and a list of messages. We’re going to use the Node.JS web framework express to this end. Make sure Node.JS is installed.
 
 ```
@@ -217,17 +213,49 @@ Whether you're building a trivia game, a quiz app, or simply looking to add some
 
 [The Trivia Api](https://the-trivia-api.com/docs/v2/#section/Introduction)
 
+## The code
+```js
+axios.get('https://the-trivia-api.com/v2/questions')
+    .then((response) => {
+        questions = response.data;
+    })
+    .catch((error) => {
+        console.error(error);
+    });
+
+function sendNewQuestion() {
+    if (questions.length > 0) {
+        currentQuestion = questions[questionCount];
+
+        console.log(currentQuestion);
+
+        io.emit('question', {
+            questionText: currentQuestion.question.text,
+            choices: [
+                currentQuestion.correctAnswer,
+                ...currentQuestion.incorrectAnswers
+            ]
+        });
+    }}
+```
+
+This code makes an HTTP GET request to an API endpoint using the Axios library. The endpoint is "https://the-trivia-api.com/v2/questions", and the response is stored in a variable called questions. 
+
+The sendNewQuestion() function uses the questions array to send a new question to a client using web sockets. The function logs the currentQuestion object to the console and emits a message with the question and answer choices to all connected clients using the io.emit() method. The emitted message has a question event and contains an object with a questionText property, which holds the text of the current question, and a choices property, which is an array of answer choices. The answer choices array is constructed by combining the correctAnswer property of the currentQuestion object with the incorrectAnswers array using the spread operator (...).
+
 ## Data modelling
 - insert data modeling pic
+![proto](https://github.com/SundousKanaan/RTW-Groep/blob/hilal/readme-images/prototype.png)
+
 
 
 ---
 
-## Server Side Code
+## Server Side Code + uitleg hiervan
 
 --- 
 
-## Client Side Code
+## Client Side Code + uitleg hiervan
 
 ---
 
