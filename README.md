@@ -226,6 +226,8 @@ After looking for similar Quiz type Api's i found the Trivia Api. I looooove to 
 
 The meme rater and furniture bidding could've also worked out, but I could not find good Api's for these concepts.
 
+To check out the code for the Math.js concept you can go to my hilal branch from this repo.
+
 ---
 
 # External data source
@@ -332,6 +334,7 @@ Another thing is that the answers from the questions Api were being displayed tw
 
 
 ## TO DO
+- [ ] Handle issues
 - [ ] Readme (mee bezig)
 - [ ] documentatie in codes (als laatste kan dit)
 - [ ] offline status uitwerken
