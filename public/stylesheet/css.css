@@ -323,3 +323,15 @@ div{
 ul#answer-choices ul {
     display: none;
 }
+
+
+#questions {
+    border: 5px solid transparent;
+    transition: border-color 1s ease-out;
+  }
+  
+  #questions.no-border {
+    border-color: lightgreen;
+  }
+
+  

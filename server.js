@@ -74,13 +74,14 @@ function sendNewQuestion() {
         });
 
         console.log('emitted question')
-         // Play the sound effect
-    //     player.play('public/sounds/sound.mp3', function (err) {
-    //     if (err) throw err;
-    //   });
+        //  Play the sound effect
+        player.play('public/sounds/sound.mp3', function (err) {
+        if (err) throw err;
+      });
     // Vraag: deployment cant find suitable audio player?
     }
 }
+  
 
 app.get('/', (request, response) => {
   response.render('index');

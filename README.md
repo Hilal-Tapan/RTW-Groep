@@ -2,7 +2,7 @@
 During this course we will learn how to build a real-time application. We will learn techniques to setup an open connection between the client and the server. This will enable us to send data in real-time both ways, at the same time.
 
 ## 👁️ Demo Link! 👁️
-[LIVE LINK](https://rtw-groep-production-324f.up.railway.app/)
+[https://rtw-groep-production-324f.up.railway.app/](https://rtw-groep-production-324f.up.railway.app/)
 
 ---
 
@@ -156,7 +156,11 @@ io.on('connection', (socket) => {
 
 ---
 
-## Process
+# Process
+## Sketch for the chat area
+Here i made a quick sketch as a reference when coding.
+![sketch](https://github.com/Hilal-Tapan/RTW-Groep/blob/main/public/images/IMG_0172.jpg)
+
 ### Trying to display a username
 One of our features is that the user can choose a username and this gets displayed with each message.
 
@@ -203,7 +207,28 @@ We thought it was important to display yourself on the right, and all the other 
 
 ---
 
-# API
+## Prototype of the chat.io area
+### Log in page
+![proto](https://github.com/SundousKanaan/RTW-Groep/blob/hilal/readme-images/prototype.png)
+
+### Chat area
+![proto](https://github.com/SundousKanaan/RTW-Groep/blob/hilal/readme-images/prototype-1.png)
+
+---
+
+# Concept
+## Ideas
+![ideas](https://github.com/Hilal-Tapan/RTW-Groep/blob/main/public/images/IMG_0174.jpg)
+
+I had a couple ideas in mind for the Api part of this project. At first i wanted to do a math solver where users in the chat had to solve a math problem. I had already started on this code with math.js but i did not manage to get it working like i wanted and this resulted in losing motivation for the concept. Also im really bad at math so idk why i picked that idea. 
+
+After looking for similar Quiz type Api's i found the Trivia Api. I looooove to play trivia pursuit so this sounded perfect. The Api is a rest Api and its well documented to i went with this idea.
+
+The meme rater and furniture bidding could've also worked out, but I could not find good Api's for these concepts.
+
+---
+
+# External data source
 ## The Trivia Api
 The Trivia API is a web-based service that provides developers with a simple and easy-to-use interface for accessing a vast collection of trivia questions and answers. With over 30,000 questions available in multiple categories, the API offers a wealth of information for developers looking to create trivia-based applications or games.
 
@@ -244,10 +269,31 @@ This code makes an HTTP GET request to an API endpoint using the Axios library. 
 The sendNewQuestion() function uses the questions array to send a new question to a client using web sockets. The function logs the currentQuestion object to the console and emits a message with the question and answer choices to all connected clients using the io.emit() method. The emitted message has a question event and contains an object with a questionText property, which holds the text of the current question, and a choices property, which is an array of answer choices. The answer choices array is constructed by combining the correctAnswer property of the currentQuestion object with the incorrectAnswers array using the spread operator (...).
 
 ## Data modelling
-- insert data modeling pic
-![proto](https://github.com/SundousKanaan/RTW-Groep/blob/hilal/readme-images/prototype.png)
+I made a data model based on the response you get from the Api.
 
+![datamodel](https://github.com/Hilal-Tapan/RTW-Groep/blob/main/public/images/IMG_0173.jpg)
 
+![datamodel](https://github.com/Hilal-Tapan/RTW-Groep/blob/main/public/images/IMG_0173.jpg)
+
+- Misschien nog beetje aanvullen beschrijving?
+
+---
+
+## Real Time Events
+### Online Chatting
+Users can chat with each other online. This was done using socket.io.
+
+### Usernames
+Users can set a username at the beginning that will be displayed with every message.
+
+### Typing...
+When someone is typing, all users will see this in the chat.
+
+### Positions
+The position of your own messages will be on the right and all other users' messafes will be on the left. This way the user can easily see their own messages in the chat room
+
+### Correct Answers
+If the chat message contains the correct answer for that specific question, the next question will be displayed for all users.
 
 ---
 
@@ -259,27 +305,26 @@ The sendNewQuestion() function uses the questions array to send a new question t
 
 ---
 
-## Prototype of the chat.io area
-### Log in page
-![proto](https://github.com/SundousKanaan/RTW-Groep/blob/hilal/readme-images/prototype.png)
-
-### Chat area
-![proto](https://github.com/SundousKanaan/RTW-Groep/blob/hilal/readme-images/prototype-1.png)
+## Trivia.Chat High figh prototype
+- insert pictures
 
 
 
 ## Vragen
 * heb gitignore later toegevoegd hoe kan ik die node modules toch nog verwijderen
-* Me geluidje doet t niet alleen bij deploy site
-* Die offline state
+* Me geluidje doet t niet  bij deploy site wel bij localhost
+* Die tekst daaronder de vragen krijg k maar niet weg
 
 
 ## TO DO
 - Readme
 - documentatie in codes
 - offline status uitwerken
-- Geluid fixen
+- Geluid fixen?
 - eventueel ook kleurtje toevoegen naast geluid
+- Die tekst daaronder wegkrijgen
+- offline state
+
 
 
 ## Sources
