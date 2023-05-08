@@ -334,6 +334,7 @@ Another thing is that the answers from the questions Api were being displayed tw
 
 
 ## TO DO
+- [ ] data life cycle
 - [ ] Handle issues
 - [ ] Readme (mee bezig)
 - [ ] documentatie in codes (als laatste kan dit)
