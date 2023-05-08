@@ -334,4 +334,21 @@ ul#answer-choices ul {
     border-color: lightgreen;
   }
 
+
+  /* OFFLINE */
+  .socket-disconnected {
+    border: none;
+  }
+  
+  .socket-disconnected::before {
+    content: "You are disconnected from the server. Please check your internet connection and try again.";
+    display: block;
+    background-color: lightgray;
+    color: #ff0000;
+    padding: 20px;
+    border-radius: 2em;
+    text-align: center;
+    width: 30vw;
+  }
+  
   

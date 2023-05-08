@@ -2,9 +2,7 @@ const express = require('express');
 const app = express();
 const http = require('http').createServer(app);
 const io = require('socket.io')(http, {
- 
-  maxHttpBufferSize: 1000,
-  reconnectionAttempts: 10, // is dit wat jullie bedoelen met offline?
+
 });
 
 const axios = require('axios');
@@ -31,27 +29,21 @@ axios.get('https://the-trivia-api.com/v2/questions')
     });
 
 
-io.on('connection', async (socket) => {
-    console.log('connected');
-
-    // flush the event buffer on reconnect
-    socket.on('reconnect', (attemptNumber) => {
-      console.log(`reconnected after ${attemptNumber} attempts`);
-      socket.emitBuffered(); // flush the buffer
-    });
-
-    sendNewQuestion();
-
-    socket.on('chat message', (chat) => {
-        console.log(chat)
-
-        if (chat.message.includes(currentQuestion.correctAnswer)) {
-            console.log("correctAnswer")// Check if the chat message includes the correct answer
-            questionCount++; // Increment question count
-            sendNewQuestion(); // Send a new question
-        }
-        io.emit('chat message', chat); // broadcast the message to all clients
-    });
+    io.on('connection', async (socket) => {
+        console.log('connected');
+    
+        sendNewQuestion();
+    
+        socket.on('chat message', (chat) => {
+            console.log(chat)
+    
+            if (chat.message.toLowerCase().includes(currentQuestion.correctAnswer.toLowerCase())) {
+                console.log("correctAnswer")// Check if the chat message includes the correct answer
+                questionCount++; // Increment question count
+                sendNewQuestion(); // Send a new question
+            }
+            io.emit('chat message', chat); // broadcast the message to all clients
+        });
 
     socket.on('disconnect', () => {
         console.log('user disconnected');
@@ -75,8 +67,8 @@ function sendNewQuestion() {
 
         console.log('emitted question')
         //  Play the sound effect
-    //     player.play('public/sounds/sound.mp3', function (err) {
-    //     if (err) throw err;
+        // player.play('public/sounds/sound.mp3', function (err) {
+        // if (err) throw err;
     //   });
     // Vraag: deployment cant find suitable audio player?
     }
@@ -93,7 +85,8 @@ http.listen(port, () => {
 
 
 
-
+// string to lowercase uitproberen
+// met een settimeout socket.connection checken elke halve seconden. Als er geen connectie is geef je class mee en deze stijl je met tekst
 
 // AANTEKENINGEN
 // on connection ipv on answer waar die nu op staat
