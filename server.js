@@ -1,25 +1,35 @@
+// variables --------------------------------------------------------------------------------------
 const express = require('express');
 const app = express();
 const http = require('http').createServer(app);
 const io = require('socket.io')(http, {
-
 });
 
+
 const axios = require('axios');
-const { Console } = require('console');
 const port = process.env.PORT || 4242;
 const player = require('play-sound')();
 
+
+// View engine en static files ---------------------------------------------------------------------
 app.set('views', 'views');
 app.set('view engine', 'ejs');
 app.use(express.static('public'));
 
+
+// Chat en wordDescription geschiedenis ------------------------------------------------------------
+const historySize = 50;
+let chatHistory = [];
+let wordDescriptionHistory = [];
+
+
+// Variabelen voor de trivia game ------------------------------------------------------------------
 let questions = undefined;
-let questionsLoaded = false;
 let currentQuestion = undefined;
 let questionCount = 0;
 
 
+// Fetch vragen van API ----------------------------------------------------------------------------
 axios.get('https://the-trivia-api.com/v2/questions')
     .then((response) => {
         questions = response.data;
@@ -29,66 +39,116 @@ axios.get('https://the-trivia-api.com/v2/questions')
     });
 
 
-    io.on('connection', async (socket) => {
-        console.log('connected');
-    
-        sendNewQuestion();
-    
-        socket.on('chat message', (chat) => {
-            console.log(chat)
-    
-            if (chat.message.toLowerCase().includes(currentQuestion.correctAnswer.toLowerCase())) {
-                console.log("correctAnswer")// Check if the chat message includes the correct answer
-                questionCount++; // Increment question count
-                sendNewQuestion(); // Send a new question
-            }
-            io.emit('chat message', chat); // broadcast the message to all clients
-        });
+// Socket IO listeners -----------------------------------------------------------------------------
+io.on('connection', async (socket) => {
+    console.log('connected');
 
+    // Stuur chat en wordDescription geschiedenis naar de nieuwe client
+    socket.emit('chat history', chatHistory);
+    socket.emit('word description history', wordDescriptionHistory);
+
+    // Functie die ik oproep
+    sendNewQuestion();
+
+    // Ontvang chat messages
+    socket.on('chat message', (chat) => {
+        console.log(chat)
+
+        // Verwijder oudere berichten als er meer dan historySize berichten in de geschiedenis zitten
+        while (chatHistory.length >= historySize) {
+            chatHistory.shift();
+        }
+        chatHistory.push(chat);
+
+        // Controleer of het antwoord correct is en stuur een nieuwe vraag als dat het geval is
+        // Met de toLowerCase accepteer ik zowel lowercase als uppercase letters
+        // Met includes accepteerd die de correctAnswer ook als er andere woorden bij zijn geschreven.
+        if (chat.message.toLowerCase().includes(currentQuestion.correctAnswer.toLowerCase())) {
+            console.log("correctAnswer")
+            questionCount++; // Volgende trivia vraag bij correctAnswer 
+            sendNewQuestion(); // Stuur een nieuwe vraag functie
+        }
+        io.emit('chat message', chat); // Stuur de chat message naar alle clients
+    });
+
+
+    // Ontvang wordData
+    socket.on('wordData', (data) => {
+        // Stuur de ontvangen wordData naar alle clients
+        io.emit('wordData', data);
+
+        // Verwijder oudere berichten als er meer dan historySize berichten in de geschiedenis zitten
+        while (wordDescriptionHistory.length >= historySize) {
+            wordDescriptionHistory.shift();
+        }
+
+        // Voeg de ontvangen wordData toe aan de geschiedenis
+        wordDescriptionHistory.push(data);
+    })
+
+
+    // Wanneer de gebruiker uitlogt, print dit in de console
     socket.on('disconnect', () => {
         console.log('user disconnected');
     });
 });
 
 
+// Deze functie stuurt een nieuwe vraag naar alle clients -------------------------------------------------
 function sendNewQuestion() {
+    // Controleer of er nog vragen zijn om te versturen
     if (questions.length > 0) {
+        // Haal de huidige vraag op
         currentQuestion = questions[questionCount];
 
         console.log(currentQuestion);
 
+        // Stuur de vraag en antwoord-keuzes naar alle clients
         io.emit('question', {
-            questionText: currentQuestion.question.text,
+            questionText: currentQuestion.question.text, // Stuur de tekst van de vraag
             choices: [
-                currentQuestion.correctAnswer,
-                ...currentQuestion.incorrectAnswers
+                currentQuestion.correctAnswer, // Stuur het juiste antwoord
+                ...currentQuestion.incorrectAnswers // Stuur alle foute antwoorden
             ]
         });
 
-        console.log('emitted question')
-        //  Play the sound effect
+        console.log('emitted question');
+
+        // Speel geluid af. 
+        // Bij de localhost werkt deze, maar niet bij railwap.app. Dit komt omdat ik het in
+        // de server heb gedaan en niet in de client. Helaas geen tijd gehad dit aan te passen.
+
         // player.play('public/sounds/sound.mp3', function (err) {
-        // if (err) throw err;
-    //   });
-    // Vraag: deployment cant find suitable audio player?
+        //     // Behandel eventuele fouten die tijdens het afspelen optreden
+        //     if (err) throw err;
+        // });
     }
 }
-  
 
+
+
+// Homepage -------------------------------------------------------------------------------------
 app.get('/', (request, response) => {
-  response.render('index');
+    response.render('index');
 });
 
+
+
+// Start server op de opgegeven port ------------------------------------------------------------
 http.listen(port, () => {
-  console.log('listening on port:', port);
+    console.log('listening on port:', port);
 });
 
 
+
+
+
+
+// AANTEKENINGEN ----------------------------------------------------------------------------------
 
 // string to lowercase uitproberen
 // met een settimeout socket.connection checken elke halve seconden. Als er geen connectie is geef je class mee en deze stijl je met tekst
 
-// AANTEKENINGEN
 // on connection ipv on answer waar die nu op staat
 
 // fetch ook in server
@@ -110,7 +170,7 @@ http.listen(port, () => {
 //         currentQuestion = questions[questionCount];
 
 //         console.log(currentQuestion);
-        
+
 //         io.emit('question', {
 //             questionText: currentQuestion.question.text,
 //             choices: [
@@ -124,7 +184,7 @@ http.listen(port, () => {
 
 //         socket.on('chat message', (chat) => {
 //             console.log(chat)
-            
+
 //             if (chat.message.includes(currentQuestion.correctAnswer)) { 
 //                 console.log("correctAnswer")// Check if the chat message includes the correct answer
 //                 questionCount++; // Increment question count
