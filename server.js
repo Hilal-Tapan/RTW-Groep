@@ -17,10 +17,9 @@ app.set('view engine', 'ejs');
 app.use(express.static('public'));
 
 
-// Chat en wordDescription geschiedenis ------------------------------------------------------------
+// Chat geschiedenis -------------------------------------------------------------------------------
 const historySize = 50;
 let chatHistory = [];
-let wordDescriptionHistory = [];
 
 
 // Variabelen voor de trivia game ------------------------------------------------------------------
@@ -43,12 +42,12 @@ axios.get('https://the-trivia-api.com/v2/questions')
 io.on('connection', async (socket) => {
     console.log('connected');
 
-    // Stuur chat en wordDescription geschiedenis naar de nieuwe client
-    socket.emit('chat history', chatHistory);
-    socket.emit('word description history', wordDescriptionHistory);
-
     // Functie die ik oproep
     sendNewQuestion();
+    
+    socket.on('chatHistory', () => {
+        socket.emit('chatHistory', chatHistory);
+    })
 
     // Ontvang chat messages
     socket.on('chat message', (chat) => {
@@ -59,6 +58,7 @@ io.on('connection', async (socket) => {
             chatHistory.shift();
         }
         chatHistory.push(chat);
+        console.log( ' chatHistory',chatHistory)
 
         // Controleer of het antwoord correct is en stuur een nieuwe vraag als dat het geval is
         // Met de toLowerCase accepteer ik zowel lowercase als uppercase letters
@@ -70,21 +70,6 @@ io.on('connection', async (socket) => {
         }
         io.emit('chat message', chat); // Stuur de chat message naar alle clients
     });
-
-
-    // Ontvang wordData
-    socket.on('wordData', (data) => {
-        // Stuur de ontvangen wordData naar alle clients
-        io.emit('wordData', data);
-
-        // Verwijder oudere berichten als er meer dan historySize berichten in de geschiedenis zitten
-        while (wordDescriptionHistory.length >= historySize) {
-            wordDescriptionHistory.shift();
-        }
-
-        // Voeg de ontvangen wordData toe aan de geschiedenis
-        wordDescriptionHistory.push(data);
-    })
 
 
     // Wanneer de gebruiker uitlogt, print dit in de console
@@ -131,7 +116,6 @@ function sendNewQuestion() {
 app.get('/', (request, response) => {
     response.render('index');
 });
-
 
 
 // Start server op de opgegeven port ------------------------------------------------------------

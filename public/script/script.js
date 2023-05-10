@@ -6,7 +6,7 @@ const questionChoices = document.querySelector('#answer-choices');
 const input = document.querySelector('#message-input');
 const sendMessage = document.querySelector('#message-button');
 const usernameInput = document.querySelector('#username-input');
-const loggin = document.querySelector('main section:first-of-type');
+const logginScreen = document.querySelector('main section:first-of-type');
 const chatScreen = document.querySelector('main section:last-of-type');
 const logginButton = document.querySelector('main section:first-of-type > button');
 
@@ -26,9 +26,10 @@ usernameInput.addEventListener('keydown', (event) => {
 
 // Login button -------------------------------------------------------------------------------------
 logginButton.addEventListener('click', () => {
-    loggin.classList.add('hidden'); // Geeft hidden class mee
+    logginScreen.classList.add('hidden'); // Geeft hidden class mee
     chatScreen.classList.remove('hidden'); // Verwijderd hidden class
     socket.emit('focus', true); // Stuur de focus class naar andere klanten
+    socket.emit('chatHistory')
   });
 
 
@@ -117,26 +118,16 @@ socket.on('question', (data) => {
   
 
   
-  // Word Description History -------------------------------------------------------------------------
-  socket.on('word description history', wordDescriptionHistory => {
-    // Doorloop elk data object in de array wordDescriptionHistory
-    wordDescriptionHistory.forEach(data => {
-      // Roep de functie displayData aan met het huidige data sobject als argument
-      displayData(data);
-    })
-  })
-  
-
-
   // Chat History -------------------------------------------------------------------------------------
-  socket.on('chat history', chatHistory => {
-    // Doorloop elk chatobject in de chatHistory array
-    chatHistory.forEach(chat => {
-      // Roep de functie addChatMessage aan met het huidige chatobject als argument
-      addChatMessage(chat);
-    })
-  })
-  
+  socket.on('chatHistory', (chatHistory) => {
+    console.log('chatHistory', chatHistory);
+    for (const chat of chatHistory) {
+      const element = document.createElement('li');
+      element.textContent = ` ${chat.username}: ${chat.message} `;
+      messages.appendChild(element);
+    }
+    messages.scrollTop = messages.scrollHeight;
+  });
   
 
   // Error --------------------------------------------------------------------------------------------

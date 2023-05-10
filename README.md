@@ -311,6 +311,7 @@ If the chat message contains the correct answer for that specific question, the 
 - insert pictures
 
 
+
 # Reflection
 ## What went well?
 The socket start up went pretty well! It was well documented on the website which helped a lot. Also working together with Sundous in the first week went very well! We made a good and hardworking team.
@@ -334,12 +335,12 @@ Another thing is that the answers from the questions Api were being displayed tw
 
 
 ## TO DO
-- [ ] data life cycle
-- [ ] Handle issues
+- [ ] data life cycle diagram
+- [ ] Localstorage (mee bezig)
+- [ ] Handle issues, zet ook in readme
 - [ ] Readme (mee bezig)
-- [ ] documentatie in codes (als laatste kan dit)
-- [ ] offline status uitwerken
-- [ ] Geluid fixen (extra dingetje)?
+- [X] documentatie in codes (als laatste kan dit)
+- [X] offline status uitwerken
 - [x] eventueel ook kleurtje toevoegen naast geluid
 - [x] Die tekst daaronder wegkrijgen
 
