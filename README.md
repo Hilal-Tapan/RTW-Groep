@@ -685,6 +685,9 @@ During a peerreview i got feedback that none of the answers were seen as correct
 ### Data Life Cycle
 At first my data life cycle was not correct, in my cycle i linked the api directly to my client but it should've been linked to my client since im fetching via my server.
 
+### Other
+To check out the other peerreviews you can check my issues.
+
 ---
 
 ## Sources
