@@ -58,7 +58,7 @@ io.on('connection', async (socket) => {
             chatHistory.shift();
         }
         chatHistory.push(chat);
-        console.log( ' chatHistory',chatHistory)
+        console.log( 'chatHistory',chatHistory)
 
         // Controleer of het antwoord correct is en stuur een nieuwe vraag als dat het geval is
         // Met de toLowerCase accepteer ik zowel lowercase als uppercase letters

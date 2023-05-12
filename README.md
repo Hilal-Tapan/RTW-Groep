@@ -14,7 +14,7 @@ This is a project based on the course Real Time Web (RTW) from the minor web, at
 ---
 
 ## 📖 Job Story 📖
-As a web user, I want to be able to play Trivia quiz game online with other people, so i can entertain myself.
+As a web user, I want to be able to play Trivia quiz game online with other people, so I can entertain myself.
 
 ---
 
@@ -671,7 +671,7 @@ Another thing is that the answers from the questions Api were being displayed tw
 --- 
 
 ## Peerreviews
-### Uppercase
+### Uppercase and lowercase
 During a peerreview i got feedback that none of the answers were seen as correct. I immediately knew this was because in the Api some letters are uppercase. I fixed this by adding a toLowercase.
 
 ```js
@@ -687,6 +687,12 @@ At first my data life cycle was not correct, in my cycle i linked the api direct
 
 ### Space in api answers
 The api has sometimes a space after a word. When you don't put this space in your chat it doesn't accept the answer. I tried to fix this with includes so when you put the right answer in a sentence it is accepted. But when you dont use a sentece it wont accept it because ur not using a space.
+
+### .gitignore
+I forgot to put my .DS_Store and node-modules in my gitignore file. I noticed this after a peerreview from someone. I immediately fixed it.
+
+### 
+
 
 ### Other
 To check out the other peerreviews you can check my issues.
