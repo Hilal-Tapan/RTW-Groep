@@ -50,8 +50,7 @@ TypeError: Cannot read properties of undefined (reading 'length')
 ```
 The way to fix this is just rerunning the ```node server.js``` till it works.
 
-**It was very hard to fix it so after a long session with Justus he said it was fine to keep it this way.**
-
+**It was very hard to fix it so after a long session with Justus he said it was fine to keep it this way, since it works most of the time**
 
 ---
 
@@ -638,8 +637,11 @@ Overall, this code handles various user interactions, communicates with the serv
 ---
 
 ## Trivia.Chat High figh prototype
-- insert pictures
+![1](https://github.com/Hilal-Tapan/RTW-Groep/blob/main/public/images/eind-1.png)
 
+![2](https://github.com/Hilal-Tapan/RTW-Groep/blob/main/public/images/eind-2.png)
+
+![2](https://github.com/Hilal-Tapan/RTW-Groep/blob/main/public/images/eind-3.png)
 
 
 # Reflection
@@ -664,10 +666,24 @@ Another thing is that the answers from the questions Api were being displayed tw
 * Add point count to people
 * "user joined and left chat" functionality
 
+--- 
+
 ## Peerreviews
+### Uppercase
+During a peerreview i got feedback that none of the answers were seen as correct. I immediately knew this was because in the Api some letters are uppercase. I fixed this by adding a toLowercase.
 
+```js
+ if (chat.message.toLowerCase().includes(currentQuestion.correctAnswer.toLowerCase())) {
+            console.log("correctAnswer")
+            questionCount++; // Volgende trivia vraag bij correctAnswer 
+            sendNewQuestion(); // Stuur een nieuwe vraag functie
+        }
+```
 
+### Data Life Cycle
+At first my data life cycle was not correct, in my cycle i linked the api directly to my client but it should've been linked to my client since im fetching via my server.
 
+---
 
 ## Sources
 * https://www.npmjs.com/package/nodemon 
