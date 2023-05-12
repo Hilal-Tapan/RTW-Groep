@@ -51,7 +51,7 @@ node app.js
 * Can choose a username and which gets displayed with each message
 * Can play a Trivia quiz game together
 * Own messages are getting displayed on the right side of the screen, the other users on the left side
-* 
+
 
 ---
 
@@ -336,7 +336,7 @@ Another thing is that the answers from the questions Api were being displayed tw
 
 ## TO DO
 - [ ] data life cycle diagram
-- [ ] Localstorage (mee bezig)
+- [X] Localstorage (mee bezig)
 - [ ] Handle issues, zet ook in readme
 - [ ] Readme (mee bezig)
 - [X] documentatie in codes (als laatste kan dit)
