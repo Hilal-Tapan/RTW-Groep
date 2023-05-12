@@ -643,7 +643,7 @@ Overall, this code handles various user interactions, communicates with the serv
 
 ![3](https://github.com/Hilal-Tapan/RTW-Groep/blob/main/public/images/eind-3.png)
 
-![4](https://github.com/Hilal-Tapan/RTW-Groep/blob/main/public/images/eind-3.png)
+![4](https://github.com/Hilal-Tapan/RTW-Groep/blob/main/public/images/eind-4.png)
 
 
 # Reflection
