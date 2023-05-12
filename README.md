@@ -641,7 +641,9 @@ Overall, this code handles various user interactions, communicates with the serv
 
 ![2](https://github.com/Hilal-Tapan/RTW-Groep/blob/main/public/images/eind-2.png)
 
-![2](https://github.com/Hilal-Tapan/RTW-Groep/blob/main/public/images/eind-3.png)
+![3](https://github.com/Hilal-Tapan/RTW-Groep/blob/main/public/images/eind-3.png)
+
+![4](https://github.com/Hilal-Tapan/RTW-Groep/blob/main/public/images/eind-3.png)
 
 
 # Reflection
