@@ -654,6 +654,8 @@ The sound player was actually very easy to achieve. I had never worked with soun
 
 The green border that gets visible after the correct answer is being sent in the chat. This was pretty fun to do and worked out very well. Im happy with the end results.
 
+The offline functionality went great!
+
 
 ## What went wrong?
 Quite a few things went wrong actually. To start off the Api switch, I started out with math.js, which caused me to loose some time cause i couldn't get it to work. I switched to Trivia Api which was a much better option. 
