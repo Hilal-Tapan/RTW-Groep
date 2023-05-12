@@ -273,11 +273,39 @@ The sendNewQuestion() function uses the questions array to send a new question t
 ## Data modelling
 I made a data model based on the response you get from the Api.
 
-![datamodel](https://github.com/Hilal-Tapan/RTW-Groep/blob/main/public/images/IMG_0173.jpg)
+```json
+[
+{
+"category": "music",
+"id": "622a1c357cc59eab6f94fd79",
+"correctAnswer": "The Righteous Brothers",
+"incorrectAnswers": [
+"The Isley Brothers",
+"Wham!",
+"The Temptations"
+],
+"question": {
+"text": "Who Were Bobby Hatfield & Bill Medley?"
+},
+"tags": [
+"people",
+"music"
+],
+"type": "text_choice",
+"difficulty": "hard",
+"regions": [],
+"isNiche": false
+}, ...
+]
+```
 
-![datamodel](https://github.com/Hilal-Tapan/RTW-Groep/blob/main/public/images/IMG_0173.jpg)
+![datamodel](https://github.com/Hilal-Tapan/RTW-Groep/blob/main/public/images/IMG_0178.jpg)
 
-- Misschien nog beetje aanvullen beschrijving?
+
+## Data Lifecycle Diagram
+![lifecycle](https://github.com/Hilal-Tapan/RTW-Groep/blob/main/public/images/IMG_0180.jpg)
+
+Dit is mijn data lifecycle diagram. Het bestaat uit de client, de server en de API. In de client word gecheckt of iemand connected of disconnected is en dit word gestuurd naar de server. Messages en is typing word naar beide kanten gestuurd. Chat history word gestuurd naar de client vanuit de server. De data van de api wordt eerst naar de server gestuurd en daarna naar de client. Als de user de correctAnswer meegeeft in de chat word die data terug gestuurd naar de server en word er een request gedaan naar een nieuwe vraag en antwoorden. Er vinden dus verschillende real time events plaats tussen de client en server.
 
 ---
 
