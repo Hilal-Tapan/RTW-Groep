@@ -685,6 +685,9 @@ During a peerreview i got feedback that none of the answers were seen as correct
 ### Data Life Cycle
 At first my data life cycle was not correct, in my cycle i linked the api directly to my client but it should've been linked to my client since im fetching via my server.
 
+### Space in api answers
+The api has sometimes a space after a word. When you don't put this space in your chat it doesn't accept the answer. I tried to fix this with includes so when you put the right answer in a sentence it is accepted. But when you dont use a sentece it wont accept it because ur not using a space.
+
 ### Other
 To check out the other peerreviews you can check my issues.
 
