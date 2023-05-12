@@ -691,12 +691,6 @@ The api has sometimes a space after a word. When you don't put this space in you
 ### .gitignore
 I forgot to put my .DS_Store and node-modules in my gitignore file. I noticed this after a peerreview from someone. I immediately fixed it.
 
-### 
-
-
-### Other
-To check out the other peerreviews you can check my issues.
-
 ---
 
 ## Sources
