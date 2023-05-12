@@ -663,10 +663,12 @@ A second thing is the sound. When someone enters the correct answer, a sounds is
 Another thing is that the answers from the questions Api were being displayed twice. I did not know how to fix this, it took me hours the other day. One day it was gone and tbh i dont know how i did it. When i was writing code it just suddenly disappeared and i noticed later on. It was a lucky solve!
 
 
+
 ## Things i would implement if i had more time
 * Fix the sound on the deploy website when someone enters the correctAnswer. Now it only works on localHost.
 * Add point count to people
 * "user joined and left chat" functionality
+* Some answer words are getting cut on weird places. It's a weird word wrap i think but idk how to fix it and if i had more time i wouldve. 
 
 --- 
 
